@@ -11,7 +11,10 @@
       <input type="password" placeholder="Password" required>
 
       <div class="row-between">
-        <label class="checkbox"><input type="checkbox"> Remember me</label>
+        <input type="checkbox" required>
+      
+        <a href="../auth/policy.php" class="link">I agree to the Terms and Privacy Policy</a>
+          
         <a href="forgot-password.php">Forgot password?</a>
       </div>
 

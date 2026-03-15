@@ -131,9 +131,109 @@ body { background: #f5f7fa; }
 .footer a:hover { text-decoration: underline; }
 .footer-copy { margin-top: 20px; opacity:.8; text-align:center; }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .grid-3 { grid-template-columns: 1fr; }
   .booking-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
 }
+
+.prediction-result{
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+#trendIcon{
+  font-size:22px;
+}
+
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns: repeat(5,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.day{
+  padding:12px;
+  border-radius:8px;
+  text-align:center;
+  background:#f3f4f6;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.day:hover{
+  transform:scale(1.05);
+}
+
+.day.cheapest{
+  background:#1d2a3a;
+  color:white;
+  font-weight:800;
+}
+
+.day.cheap{
+  background:#dbeafe;
+}
+
+.day.normal{
+  background:#f3f4f6;
+}
+.multi-segment {
+  margin-bottom: 12px;
+}
+
+#multiCityContainer .panel {
+  margin-top: 18px;
+}
+
+#addSegmentBtn {
+  margin-top: 12px;
+}
+
+
+
+.seat-map{
+    display:grid;
+    grid-template-columns: repeat(6,50px);
+    gap:10px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.seat{
+    width:50px;
+    height:50px;
+    background:#e0e0e0;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.seat:hover{
+    background:#4CAF50;
+    color:white;
+}
+
+.seat.selected{
+    background:#2196F3;
+    color:white;
+}
+
+.seat.taken{
+    background:#444;
+    color:white;
+    cursor:not-allowed;
+}
+

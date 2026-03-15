@@ -4,6 +4,8 @@ include __DIR__ . '/config.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// $_SESSION['user_id']=1;
+// $_SESSION['role']='admin'; or user to acess user dashboard
 ?>
 
 

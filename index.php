@@ -4,64 +4,11 @@
   <div class="hero-content">
     <h1>Find & Book Your Perfect Flight</h1>
     <p>Best deals on international and domestic flights.</p>
-
-    <div class="search-container">
-      <div class="tabs" id="tripTabs">
-        <button type="button" class="tab active" data-mode="round">Round Trip</button>
-        <button type="button" class="tab" data-mode="oneway">One Way</button>
-        <button type="button" class="tab" data-mode="multi">Multi-City</button>
-      </div>
-
-      <form class="search-form" action="user/booking.php" method="GET">
-        <div class="form-group">
-          <label>From</label>
-          <select name="from">
-            <option value="Beirut">Beirut (BEY)</option>
-            <option value="Dubai">Dubai (DXB)</option>
-            <option value="London">London (LHR)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>To</label>
-          <select name="to">
-            <option value="Paris">Paris (CDG)</option>
-            <option value="Tokyo">Tokyo (HND)</option>
-            <option value="Rome">Rome (FCO)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Departure</label>
-          <input type="date" name="depart" required>
-        </div>
-
-        <div class="form-group" id="returnField">
-          <label>Return</label>
-          <input type="date" name="return">
-        </div>
-
-        <div class="form-group">
-          <label>Passengers</label>
-          <select name="seats">
-            <option value="1">1 Adult</option>
-            <option value="2">2 Adults</option>
-            <option value="3">3 Adults</option>
-          </select>
-        </div>
-
-        <!-- If user uses search form, we don't know price yet, so keep default -->
-        <input type="hidden" name="price" value="420">
-
-        <div class="form-group search-btn">
-          <button type="submit">Search Flights</button>
-        </div>
       </form>
     </div>
-  </div>
 </section>
 
-<!-- PROMO SECTION -->
+
 <section class="promo-section">
   <div class="promo-card">
     <img src="images/paris.jpg" alt="Top Destinations">
@@ -91,7 +38,7 @@
   </div>
 </section>
 
-<!-- FEATURED FLIGHTS -->
+
 <section class="featured">
   <h2>Featured Flights</h2>
   <p class="subtitle">Best deals for your next adventure</p>
@@ -128,7 +75,7 @@
   </div>
 </section>
 
-<!-- INFO BAR -->
+
 <section class="info-bar">
   <div class="info-item"><h4>24/7 Customer Support</h4></div>
   <div class="info-item"><h4>Easy & Secure Booking</h4></div>

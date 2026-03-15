@@ -17,10 +17,14 @@
       <!-- CONFIRM PASSWORD -->
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
 
-      <label class="checkbox terms">
-        <input type="checkbox" required>
-        I agree to the <a class="link" href="#">Terms</a> and <a class="link" href="#">Privacy Policy</a>
-      </label>
+      <div class="terms">
+<label class="checkbox">
+<input type="checkbox" required>
+<span>
+<a href="../auth/policy.php" class="link">I agree to the Terms and Privacy Policy</a>
+</span>
+</label>
+</div>
 
       <button class="btn-primary" type="submit">Sign Up</button>
     </form>
@@ -39,7 +43,7 @@ document.getElementById("registerForm").addEventListener("submit", function(e){
 
     if(password !== confirmPassword){
         alert("Password does not match!");
-        e.preventDefault(); // stop form submission
+        e.preventDefault(); 
     }
 
 });

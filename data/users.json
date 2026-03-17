@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Site Admin",
+        "email": "admin@lebaneseairline.com",
+        "password": "$2y$10$bJKuC6iaRfx1l5c.6X.krOea3Q7U5F82myBcy4EapdehS9CCElvFa",
+        "role": "admin",
+        "created_at": "2026-03-17T15:55:56+01:00"
+    },
+    {
+        "id": 2,
+        "name": "Charbel CHERRO",
+        "email": "charbel.cherro@isae.edu.lb",
+        "password": "$2y$10$pm1Bgln6UDpsXK.ACUWNl.4GGsO0lzC239v7lK430L6LGmMS.0Eou",
+        "role": "user",
+        "created_at": "2026-03-17T15:56:27+01:00"
+    }
+]

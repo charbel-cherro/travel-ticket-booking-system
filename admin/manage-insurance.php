@@ -3,7 +3,7 @@ require_admin(); ?>
 
 <section class="page">
   <div class="page-header">
-    <h2>Manage Insurance (UI only)</h2>
+    <h2>Manage Insurance </h2>
   </div>
 
   <div class="panel">

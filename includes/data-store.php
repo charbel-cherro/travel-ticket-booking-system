@@ -37,7 +37,7 @@ function app_default_users(): array {
     return [
         [
             'id' => 1,
-            'name' => 'Site Admin',
+            'name' => 'Admin',
             'email' => 'admin@lebaneseairline.com',
             'password' => password_hash('Admin123!', PASSWORD_DEFAULT),
             'role' => 'admin',

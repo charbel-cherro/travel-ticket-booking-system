@@ -62,7 +62,7 @@ $flights = get_all_flights();
   <div class="page-header">
     <span class="eyebrow">Admin area</span>
     <h2>Manage Flights</h2>
-    <p class="muted">Admins can now add both a flight name and a flight code, and edit the date and time of any flight.</p>
+     
   </div>
 
   <?php if ($message): ?>
@@ -83,7 +83,7 @@ $flights = get_all_flights();
 
         <div class="form-group">
           <label>Flight code</label>
-          <input type="text" name="code" value="<?= htmlspecialchars($editingFlight['code'] ?? '') ?>" placeholder="MEA203" required>
+          <input type="text" name="code" value="<?= htmlspecialchars($editingFlight['code'] ?? '') ?>" placeholder="LA203" required>
         </div>
 
         <div class="form-row">

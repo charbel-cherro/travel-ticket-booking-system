@@ -6,6 +6,7 @@ Frontend prototype of a flight booking system built with:
 - HTML
 - CSS
 - JavaScript
+-JSON (temporary data storage for authentication)
 
 ## Features
 
@@ -19,20 +20,13 @@ Frontend prototype of a flight booking system built with:
 
 also if you want doctor download the source of code use xamp and run using yor browser:https://localhost/travel-booking-system/
 
-also since it is only the front-end no back-end(no database) if you want to try the interface of user when loggin how 
-header  change and also when an admin loggin how the header of the page change to see it in header of php after
-this: 
-<?php
-include __DIR__ . '/config.php';
+for acess the admin page please login via these credentials :
+email:admin@lebaneseairline.com
+pass:Admin123!
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-paste this:
-$_SESSION['user_id']=1;
-$_SESSION['role']='user'; or change it to admin to acess the admin interface or user interface since this is only front-end no database
-?>
+also jason is only used to get the admin login page and the user login page saved the user email and password when logg in 
 
-if you want because there is no refresh method because still without database before switching between user and admin open
-this in your browser:http://localhost/travel-booking-system/auth/logout.php
-click refresh then go back to the main link so you can switch
+for the seat there no directly data when a seat is booked to turn red this will be implement when we diggin the concept of the database sql
+
+since github only support video of size less than 100mb these the link of google drive where you can find
+the video of the new website:https://drive.google.com/drive/folders/1jxCzUGR4Z_FnTIWEiHf6lk7fr-LGMJ5O?usp=drive_link

@@ -4,8 +4,7 @@ require_admin(); ?>
 <section class="page">
 
 <div class="page-header">
-<h2>Manage Destinations (UI only)</h2>
-<p class="muted">Add, update, delete destinations.</p>
+<h2>Manage Destinations </h2>
 </div>
 
 <div class="panel">

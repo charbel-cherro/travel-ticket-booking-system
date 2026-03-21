@@ -8,7 +8,6 @@ usort($bookings, fn($a, $b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?
   <div class="page-header">
     <span class="eyebrow">Admin area</span>
     <h2>Manage Bookings</h2>
-    <p class="muted">Flight time is now included so bookings are easier to review.</p>
   </div>
 
   <div class="panel table-wrap modern-card">

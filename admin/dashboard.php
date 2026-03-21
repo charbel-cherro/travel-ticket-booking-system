@@ -6,7 +6,6 @@ require_admin(); ?>
     <div>
       <span class="eyebrow">Admin area</span>
       <h2>Admin Dashboard</h2>
-      <p class="muted">Manage flights, bookings, destinations, and insurance from a cleaner control panel.</p>
     </div>
   </div>
 

@@ -9,7 +9,7 @@ function default_flights(): array {
         [
             'id' => 1,
             'name' => 'Beirut–Paris',
-            'code' => 'MEA203',
+            'code' => 'LA203',
             'from' => 'Beirut',
             'to' => 'Paris',
             'date' => '2026-04-10',
@@ -21,7 +21,7 @@ function default_flights(): array {
         [
             'id' => 2,
             'name' => 'Beirut–London',
-            'code' => 'MEA118',
+            'code' => 'LA118',
             'from' => 'Beirut',
             'to' => 'London',
             'date' => '2026-04-12',
@@ -33,7 +33,7 @@ function default_flights(): array {
         [
             'id' => 3,
             'name' => 'Dubai–Tokyo',
-            'code' => 'MEA450',
+            'code' => 'LA450',
             'from' => 'Dubai',
             'to' => 'Tokyo',
             'date' => '2026-04-15',
@@ -45,7 +45,7 @@ function default_flights(): array {
         [
             'id' => 4,
             'name' => 'London–Rome',
-            'code' => 'MEA319',
+            'code' => 'LA319',
             'from' => 'London',
             'to' => 'Rome',
             'date' => '2026-04-18',
@@ -57,7 +57,7 @@ function default_flights(): array {
         [
             'id' => 5,
             'name' => 'Beirut–Istanbul',
-            'code' => 'MEA271',
+            'code' => 'LA271',
             'from' => 'Beirut',
             'to' => 'Istanbul',
             'date' => '2026-04-20',

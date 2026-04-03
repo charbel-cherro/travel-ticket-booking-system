@@ -23,10 +23,6 @@ $user = current_user();
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Role</label>
-          <input type="text" value="<?= htmlspecialchars(ucfirst($user['role'] ?? 'user')) ?>" readonly>
-        </div>
-        <div class="form-group">
           <label>Member Since</label>
           <input type="text" value="<?= htmlspecialchars(substr((string)($user['created_at'] ?? ''), 0, 10)) ?>" readonly>
         </div>

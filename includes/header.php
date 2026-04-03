@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $user = current_user();
+$currentPath = $_SERVER['SCRIPT_NAME'] ?? '';
+$hideHeaderAuth = str_contains($currentPath, '/auth/login.php') || str_contains($currentPath, '/auth/policy.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +38,7 @@ $user = current_user();
       <?php if ($user): ?>
         <span class="nav-user-chip"><?= htmlspecialchars($user['name']) ?></span>
         <a href="<?= BASE_URL ?>/auth/logout.php" class="btn-signin">Logout</a>
-      <?php else: ?>
+      <?php elseif (!$hideHeaderAuth): ?>
         <a href="<?= BASE_URL ?>/auth/login.php" class="btn-signin">Sign in</a>
       <?php endif; ?>
     </div>

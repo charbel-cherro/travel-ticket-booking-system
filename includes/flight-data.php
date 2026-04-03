@@ -15,7 +15,10 @@ function default_flights(): array {
             'date' => '2026-04-10',
             'departure' => '08:00',
             'arrival' => '12:30',
-            'price' => 420,
+            'stops' => 0,
+            'economy_price' => 420,
+            'business_price' => 690,
+            'first_price' => 980,
             'status' => 'active'
         ],
         [
@@ -27,7 +30,10 @@ function default_flights(): array {
             'date' => '2026-04-12',
             'departure' => '09:30',
             'arrival' => '14:30',
-            'price' => 350,
+            'stops' => 1,
+            'economy_price' => 350,
+            'business_price' => 620,
+            'first_price' => 910,
             'status' => 'active'
         ],
         [
@@ -39,7 +45,10 @@ function default_flights(): array {
             'date' => '2026-04-15',
             'departure' => '22:00',
             'arrival' => '10:00',
-            'price' => 490,
+            'stops' => 1,
+            'economy_price' => 490,
+            'business_price' => 830,
+            'first_price' => 1180,
             'status' => 'active'
         ],
         [
@@ -51,7 +60,10 @@ function default_flights(): array {
             'date' => '2026-04-18',
             'departure' => '11:15',
             'arrival' => '14:05',
-            'price' => 310,
+            'stops' => 0,
+            'economy_price' => 310,
+            'business_price' => 520,
+            'first_price' => 780,
             'status' => 'active'
         ],
         [
@@ -63,22 +75,54 @@ function default_flights(): array {
             'date' => '2026-04-20',
             'departure' => '07:20',
             'arrival' => '09:15',
-            'price' => 260,
+            'stops' => 0,
+            'economy_price' => 260,
+            'business_price' => 430,
+            'first_price' => 660,
             'status' => 'active'
         ]
     ];
 }
 
+function normalize_flight(array $flight): array {
+    $economy = isset($flight['economy_price']) ? (float)$flight['economy_price'] : (float)($flight['price'] ?? 0);
+    $business = isset($flight['business_price']) ? (float)$flight['business_price'] : $economy + 250;
+    $first = isset($flight['first_price']) ? (float)$flight['first_price'] : $economy + 500;
+
+    $flight['economy_price'] = $economy;
+    $flight['business_price'] = $business;
+    $flight['first_price'] = $first;
+    $flight['price'] = $economy;
+    $flight['stops'] = (int)($flight['stops'] ?? 0);
+    $flight['status'] = $flight['status'] ?? 'active';
+
+    if (empty($flight['name']) && !empty($flight['from']) && !empty($flight['to'])) {
+        $flight['name'] = $flight['from'] . '–' . $flight['to'];
+    }
+
+    return $flight;
+}
+
+function normalize_flights(array $flights): array {
+    return array_values(array_map('normalize_flight', $flights));
+}
+
 function ensure_flights_loaded(): void {
     $flights = read_json_data('flights', []);
     if (!$flights) {
-        write_json_data('flights', default_flights());
+        write_json_data('flights', normalize_flights(default_flights()));
+        return;
+    }
+
+    $normalized = normalize_flights($flights);
+    if (json_encode($normalized) !== json_encode($flights)) {
+        write_json_data('flights', $normalized);
     }
 }
 
 function get_all_flights(bool $includeCancelled = true): array {
     ensure_flights_loaded();
-    $flights = read_json_data('flights', default_flights());
+    $flights = normalize_flights(read_json_data('flights', default_flights()));
     if ($includeCancelled) {
         return $flights;
     }
@@ -86,13 +130,13 @@ function get_all_flights(bool $includeCancelled = true): array {
 }
 
 function save_all_flights(array $flights): void {
-    write_json_data('flights', $flights);
+    write_json_data('flights', normalize_flights($flights));
 }
 
 function get_flight_by_id(int $id): ?array {
     foreach (get_all_flights() as $flight) {
         if ((int)$flight['id'] === $id) {
-            return $flight;
+            return normalize_flight($flight);
         }
     }
     return null;
@@ -103,7 +147,7 @@ function next_flight_id(): int {
     return $ids ? max($ids) + 1 : 1;
 }
 
-function flight_duration(string $departure, string $arrival): string {
+function flight_duration_minutes(string $departure, string $arrival): int {
     [$depH, $depM] = array_map('intval', explode(':', $departure));
     [$arrH, $arrM] = array_map('intval', explode(':', $arrival));
     $depMinutes = $depH * 60 + $depM;
@@ -111,6 +155,21 @@ function flight_duration(string $departure, string $arrival): string {
     if ($arrMinutes < $depMinutes) {
         $arrMinutes += 24 * 60;
     }
-    $diff = $arrMinutes - $depMinutes;
+    return $arrMinutes - $depMinutes;
+}
+
+function flight_duration(string $departure, string $arrival): string {
+    $diff = flight_duration_minutes($departure, $arrival);
     return floor($diff / 60) . 'h ' . ($diff % 60) . 'm';
+}
+
+function flight_price_for_class(array $flight, string $classType): float {
+    $flight = normalize_flight($flight);
+    if ($classType === 'business') {
+        return (float)$flight['business_price'];
+    }
+    if ($classType === 'first') {
+        return (float)$flight['first_price'];
+    }
+    return (float)$flight['economy_price'];
 }

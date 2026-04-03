@@ -34,7 +34,6 @@ function login_user(array $user): void {
 
 function require_login(): void {
     if (!is_logged_in()) {
-        $_SESSION['flash_error'] = 'Please sign in or create an account before booking a flight.';
         header('Location: ' . BASE_URL . '/auth/login.php');
         exit();
     }

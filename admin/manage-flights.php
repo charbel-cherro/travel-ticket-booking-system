@@ -1,26 +1,30 @@
 <?php
 include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/flight-data.php';
+require_admin();
 
 $message = '';
 $editingFlight = null;
+$flights = get_all_flights();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
-    $flights = get_all_flights();
 
     if ($action === 'save_flight') {
-        $id = (int)($_POST['flight_id'] ?? 0);
+        $flightId = (int)($_POST['flight_id'] ?? 0);
         $flight = [
-            'id' => $id > 0 ? $id : next_flight_id(),
+            'id' => $flightId > 0 ? $flightId : next_flight_id(),
             'name' => trim($_POST['name'] ?? ''),
-            'code' => trim($_POST['code'] ?? ''),
+            'code' => strtoupper(trim($_POST['code'] ?? '')),
             'from' => trim($_POST['from'] ?? ''),
             'to' => trim($_POST['to'] ?? ''),
             'date' => trim($_POST['date'] ?? ''),
             'departure' => trim($_POST['departure'] ?? ''),
             'arrival' => trim($_POST['arrival'] ?? ''),
-            'price' => (float)($_POST['price'] ?? 0),
+            'stops' => max(0, (int)($_POST['stops'] ?? 0)),
+            'economy_price' => (float)($_POST['economy_price'] ?? 0),
+            'business_price' => (float)($_POST['business_price'] ?? 0),
+            'first_price' => (float)($_POST['first_price'] ?? 0),
             'status' => trim($_POST['status'] ?? 'active'),
         ];
 
@@ -37,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         save_all_flights($flights);
         $message = $updated ? 'Flight updated successfully.' : 'Flight added successfully.';
+        $flights = get_all_flights();
     }
 
     if ($action === 'cancel_flight') {
@@ -48,21 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         save_all_flights($flights);
         $message = 'Flight cancelled successfully.';
+        $flights = get_all_flights();
     }
 }
 
 if (isset($_GET['edit'])) {
     $editingFlight = get_flight_by_id((int)$_GET['edit']);
 }
-
-$flights = get_all_flights();
 ?>
-
 <section class="page admin-layout">
   <div class="page-header">
     <span class="eyebrow">Admin area</span>
     <h2>Manage Flights</h2>
-     
+    <p class="muted">Each flight now carries separate prices for economy, business, and first class. This lets the admin define the exact price shown during booking.</p>
   </div>
 
   <?php if ($message): ?>
@@ -95,6 +98,10 @@ $flights = get_all_flights();
             <label>To</label>
             <input type="text" name="to" value="<?= htmlspecialchars($editingFlight['to'] ?? '') ?>" placeholder="Paris" required>
           </div>
+          <div class="form-group">
+            <label>Stops</label>
+            <input type="number" name="stops" min="0" value="<?= htmlspecialchars((string)($editingFlight['stops'] ?? 0)) ?>" required>
+          </div>
         </div>
 
         <div class="form-row">
@@ -114,9 +121,20 @@ $flights = get_all_flights();
 
         <div class="form-row">
           <div class="form-group">
-            <label>Base price</label>
-            <input type="number" name="price" min="0" step="0.01" value="<?= htmlspecialchars((string)($editingFlight['price'] ?? '')) ?>" required>
+            <label>Economy price</label>
+            <input type="number" name="economy_price" min="0" step="0.01" value="<?= htmlspecialchars((string)($editingFlight['economy_price'] ?? ($editingFlight['price'] ?? ''))) ?>" required>
           </div>
+          <div class="form-group">
+            <label>Business price</label>
+            <input type="number" name="business_price" min="0" step="0.01" value="<?= htmlspecialchars((string)($editingFlight['business_price'] ?? '')) ?>" required>
+          </div>
+          <div class="form-group">
+            <label>First class price</label>
+            <input type="number" name="first_price" min="0" step="0.01" value="<?= htmlspecialchars((string)($editingFlight['first_price'] ?? '')) ?>" required>
+          </div>
+        </div>
+
+        <div class="form-row">
           <div class="form-group">
             <label>Status</label>
             <select name="status">
@@ -139,6 +157,10 @@ $flights = get_all_flights();
             <th>Code</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Stops</th>
+            <th>Economy</th>
+            <th>Business</th>
+            <th>First</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -150,6 +172,10 @@ $flights = get_all_flights();
               <td><?= htmlspecialchars($flight['code']) ?></td>
               <td><?= htmlspecialchars($flight['date']) ?></td>
               <td><?= htmlspecialchars($flight['departure']) ?> - <?= htmlspecialchars($flight['arrival']) ?></td>
+              <td><?= (int)$flight['stops'] === 0 ? 'Direct' : (int)$flight['stops'] . ' stop(s)' ?></td>
+              <td>$<?= number_format((float)$flight['economy_price'], 0) ?></td>
+              <td>$<?= number_format((float)$flight['business_price'], 0) ?></td>
+              <td>$<?= number_format((float)$flight['first_price'], 0) ?></td>
               <td><span class="badge <?= $flight['status'] === 'cancelled' ? 'danger' : 'ok' ?>"><?= htmlspecialchars(ucfirst($flight['status'])) ?></span></td>
               <td class="action-stack">
                 <a class="btn-small" href="manage-flights.php?edit=<?= (int)$flight['id'] ?>">Edit</a>
@@ -166,5 +192,4 @@ $flights = get_all_flights();
     </div>
   </div>
 </section>
-
 <?php include __DIR__ . '/../includes/footer.php'; ?>

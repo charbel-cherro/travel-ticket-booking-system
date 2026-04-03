@@ -9,7 +9,11 @@
         "departure": "08:00",
         "arrival": "12:30",
         "price": 420,
-        "status": "active"
+        "status": "active",
+        "economy_price": 420,
+        "business_price": 670,
+        "first_price": 920,
+        "stops": 0
     },
     {
         "id": 2,
@@ -21,7 +25,11 @@
         "departure": "09:30",
         "arrival": "14:30",
         "price": 350,
-        "status": "active"
+        "status": "active",
+        "economy_price": 350,
+        "business_price": 600,
+        "first_price": 850,
+        "stops": 0
     },
     {
         "id": 3,
@@ -33,7 +41,11 @@
         "departure": "22:00",
         "arrival": "10:00",
         "price": 490,
-        "status": "active"
+        "status": "active",
+        "economy_price": 490,
+        "business_price": 740,
+        "first_price": 990,
+        "stops": 0
     },
     {
         "id": 4,
@@ -45,7 +57,11 @@
         "departure": "11:15",
         "arrival": "14:05",
         "price": 310,
-        "status": "active"
+        "status": "active",
+        "economy_price": 310,
+        "business_price": 560,
+        "first_price": 810,
+        "stops": 0
     },
     {
         "id": 5,
@@ -57,6 +73,58 @@
         "departure": "07:20",
         "arrival": "01:15",
         "price": 260,
-        "status": "cancelled"
+        "status": "cancelled",
+        "economy_price": 260,
+        "business_price": 510,
+        "first_price": 760,
+        "stops": 0
+    },
+    {
+        "id": 6,
+        "name": "Beirut-syria",
+        "code": "LA1042",
+        "from": "Beirut",
+        "to": "Syria",
+        "date": "2026-04-04",
+        "departure": "05:00",
+        "arrival": "06:50",
+        "stops": 0,
+        "economy_price": 20,
+        "business_price": 50,
+        "first_price": 99.99,
+        "status": "active",
+        "price": 20
+    },
+    {
+        "id": 7,
+        "name": "Beirut-cyprus",
+        "code": "LA911",
+        "from": "Beirut",
+        "to": "cyprus",
+        "date": "2026-04-16",
+        "departure": "01:56",
+        "arrival": "02:56",
+        "stops": 0,
+        "economy_price": 100,
+        "business_price": 200,
+        "first_price": 500,
+        "status": "active",
+        "price": 100
+    },
+    {
+        "id": 8,
+        "name": "Beirut-morroco",
+        "code": "LA916",
+        "from": "Beirut",
+        "to": "moroco",
+        "date": "2026-04-14",
+        "departure": "11:35",
+        "arrival": "16:35",
+        "stops": 4,
+        "economy_price": 500,
+        "business_price": 200,
+        "first_price": 1000,
+        "status": "active",
+        "price": 500
     }
 ]

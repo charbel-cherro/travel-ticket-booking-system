@@ -17,8 +17,10 @@ usort($bookings, fn($a, $b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?
           <th>Booking ID</th>
           <th>User</th>
           <th>Route</th>
+          <th>Passengers</th>
           <th>Flight code</th>
           <th>Flight time</th>
+          <th>Bags</th>
           <th>Date</th>
           <th>Status</th>
           <th>Total</th>
@@ -26,15 +28,23 @@ usort($bookings, fn($a, $b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?
       </thead>
       <tbody>
         <?php if (!$bookings): ?>
-          <tr><td colspan="8">No bookings have been created yet.</td></tr>
+          <tr><td colspan="10">No bookings have been created yet.</td></tr>
         <?php else: ?>
           <?php foreach ($bookings as $booking): ?>
             <tr>
               <td>#<?= (int)$booking['id'] ?></td>
               <td><?= htmlspecialchars($booking['user_email'] ?: $booking['user_name']) ?></td>
               <td><?= htmlspecialchars($booking['route']) ?></td>
+              <td>
+                <?php if (!empty($booking['passenger_names']) && is_array($booking['passenger_names'])): ?>
+                  <?= htmlspecialchars(implode(', ', $booking['passenger_names'])) ?>
+                <?php else: ?>
+                  <?= (int)($booking['passengers'] ?? 1) ?> traveler(s)
+                <?php endif; ?>
+              </td>
               <td><?= htmlspecialchars($booking['flight_code']) ?></td>
               <td><?= htmlspecialchars($booking['flight_time']) ?></td>
+              <td>Hand: <?= (int)($booking['hand_bags'] ?? 0) ?>, Checked: <?= (int)($booking['checked_bags'] ?? 0) ?></td>
               <td><?= htmlspecialchars($booking['date']) ?></td>
               <td><span class="badge <?= strtolower($booking['status']) === 'confirmed' ? 'ok' : 'wait' ?>"><?= htmlspecialchars($booking['status']) ?></span></td>
               <td>$<?= number_format((float)$booking['total'], 0) ?></td>

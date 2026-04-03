@@ -46,6 +46,26 @@ function app_default_users(): array {
     ];
 }
 
+function default_destinations(): array {
+    return [
+        ['id' => 1, 'city' => 'Beirut', 'country' => 'Lebanon', 'airport_code' => 'BEY'],
+        ['id' => 2, 'city' => 'Paris', 'country' => 'France', 'airport_code' => 'CDG'],
+        ['id' => 3, 'city' => 'London', 'country' => 'United Kingdom', 'airport_code' => 'LHR'],
+        ['id' => 4, 'city' => 'Dubai', 'country' => 'United Arab Emirates', 'airport_code' => 'DXB'],
+        ['id' => 5, 'city' => 'Tokyo', 'country' => 'Japan', 'airport_code' => 'HND'],
+        ['id' => 6, 'city' => 'Rome', 'country' => 'Italy', 'airport_code' => 'FCO'],
+        ['id' => 7, 'city' => 'Istanbul', 'country' => 'Turkey', 'airport_code' => 'IST'],
+    ];
+}
+
+function default_insurance_options(): array {
+    return [
+        ['id' => 1, 'name' => 'None', 'price' => 0, 'description' => 'No additional travel cover.'],
+        ['id' => 2, 'name' => 'Basic', 'price' => 15, 'description' => 'Trip delay and basic baggage support.'],
+        ['id' => 3, 'name' => 'Premium', 'price' => 30, 'description' => 'Medical support, baggage cover, and flexible assistance.'],
+    ];
+}
+
 function ensure_default_users(): void {
     $users = read_json_data('users', []);
     if (!$users) {
@@ -120,4 +140,46 @@ function get_bookings_for_user(int $userId): array {
     $bookings = array_filter(get_all_bookings(), fn($booking) => (int)($booking['user_id'] ?? 0) === $userId);
     usort($bookings, fn($a, $b) => strcmp($b['created_at'] ?? '', $a['created_at'] ?? ''));
     return array_values($bookings);
+}
+
+function ensure_destinations_loaded(): void {
+    $destinations = read_json_data('destinations', []);
+    if (!$destinations) {
+        write_json_data('destinations', default_destinations());
+    }
+}
+
+function get_all_destinations(): array {
+    ensure_destinations_loaded();
+    return read_json_data('destinations', default_destinations());
+}
+
+function save_all_destinations(array $destinations): void {
+    write_json_data('destinations', $destinations);
+}
+
+function next_destination_id(): int {
+    $ids = array_map(fn($destination) => (int)$destination['id'], get_all_destinations());
+    return $ids ? max($ids) + 1 : 1;
+}
+
+function ensure_insurance_loaded(): void {
+    $options = read_json_data('insurance-options', []);
+    if (!$options) {
+        write_json_data('insurance-options', default_insurance_options());
+    }
+}
+
+function get_all_insurance_options(): array {
+    ensure_insurance_loaded();
+    return read_json_data('insurance-options', default_insurance_options());
+}
+
+function save_all_insurance_options(array $options): void {
+    write_json_data('insurance-options', $options);
+}
+
+function next_insurance_id(): int {
+    $ids = array_map(fn($option) => (int)$option['id'], get_all_insurance_options());
+    return $ids ? max($ids) + 1 : 1;
 }

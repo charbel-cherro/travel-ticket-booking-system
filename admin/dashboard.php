@@ -12,22 +12,22 @@ require_admin(); ?>
   <div class="cards-grid cols-4">
     <div class="panel modern-card">
       <h3>Flights</h3>
-      <p>Add flights with both flight name and flight code, then edit date and time later.</p>
+      <p>Add flights, separate class prices, stops, dates, and schedule details.</p>
       <a class="btn-dark" href="manage-flights.php">Manage flights</a>
     </div>
     <div class="panel modern-card">
       <h3>Bookings</h3>
-      <p>View flight time and booking details in a clearer table.</p>
+      <p>View passenger names, baggage details, and booking totals in one place.</p>
       <a class="btn-dark" href="manage-bookings.php">Manage bookings</a>
     </div>
     <div class="panel modern-card">
       <h3>Destinations</h3>
-      <p>Maintain available destinations and pricing.</p>
+      <p>Maintain the airport list used for route setup. Seats and prices are handled per flight.</p>
       <a class="btn-dark" href="manage-destinations.php">Manage destinations</a>
     </div>
     <div class="panel modern-card">
       <h3>Insurance</h3>
-      <p>Update insurance options offered during checkout.</p>
+      <p>Display current insurance plans and add new options for checkout.</p>
       <a class="btn-dark" href="manage-insurance.php">Manage insurance</a>
     </div>
   </div>

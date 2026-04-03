@@ -20,22 +20,31 @@ $bookings = get_bookings_for_user((int)$_SESSION['user_id']);
         <tr>
           <th>Booking ID</th>
           <th>Route</th>
+          <th>Passengers</th>
           <th>Flight code</th>
           <th>Flight time</th>
           <th>Date</th>
-          <th>Seat(s)</th>
+          <th>Seats</th>
+          <th>Bags</th>
           <th>Status</th>
           <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <?php if (!$bookings): ?>
-          <tr><td colspan="8">No bookings found yet.</td></tr>
+          <tr><td colspan="10">No bookings found yet.</td></tr>
         <?php else: ?>
           <?php foreach ($bookings as $booking): ?>
             <tr>
               <td>#<?= (int)$booking['id'] ?></td>
               <td><?= htmlspecialchars($booking['route']) ?></td>
+              <td>
+                <?php if (!empty($booking['passenger_names']) && is_array($booking['passenger_names'])): ?>
+                  <?= htmlspecialchars(implode(', ', $booking['passenger_names'])) ?>
+                <?php else: ?>
+                  <?= (int)($booking['passengers'] ?? 1) ?> traveler(s)
+                <?php endif; ?>
+              </td>
               <td><?= htmlspecialchars($booking['flight_code']) ?></td>
               <td><?= htmlspecialchars($booking['flight_time']) ?></td>
               <td><?= htmlspecialchars($booking['date']) ?></td>
@@ -45,6 +54,7 @@ $bookings = get_bookings_for_user((int)$_SESSION['user_id']);
                   / <?= htmlspecialchars($booking['return_seat_number']) ?>
                 <?php endif; ?>
               </td>
+              <td>Hand: <?= (int)($booking['hand_bags'] ?? 0) ?>, Checked: <?= (int)($booking['checked_bags'] ?? 0) ?></td>
               <td><span class="badge ok"><?= htmlspecialchars($booking['status']) ?></span></td>
               <td>$<?= number_format((float)$booking['total'], 0) ?></td>
             </tr>

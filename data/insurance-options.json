@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "None",
+        "price": 0,
+        "description": "No additional travel cover."
+    },
+    {
+        "id": 2,
+        "name": "Basic",
+        "price": 15,
+        "description": "Trip delay and basic baggage support."
+    },
+    {
+        "id": 3,
+        "name": "Premium",
+        "price": 30,
+        "description": "Medical support, baggage cover, and flexible assistance."
+    },
+    {
+        "id": 4,
+        "name": "pro max",
+        "price": 100,
+        "description": "everything"
+    }
+]

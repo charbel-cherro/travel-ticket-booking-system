@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "city": "Beirut",
+        "country": "Lebanon",
+        "airport_code": "RAY"
+    },
+    {
+        "id": 2,
+        "city": "Paris",
+        "country": "France",
+        "airport_code": "CDG"
+    },
+    {
+        "id": 3,
+        "city": "London",
+        "country": "United Kingdom",
+        "airport_code": "LHR"
+    },
+    {
+        "id": 4,
+        "city": "Dubai",
+        "country": "United Arab Emirates",
+        "airport_code": "DXB"
+    },
+    {
+        "id": 5,
+        "city": "Tokyo",
+        "country": "Japan",
+        "airport_code": "HND"
+    },
+    {
+        "id": 6,
+        "city": "Rome",
+        "country": "Italy",
+        "airport_code": "FCO"
+    },
+    {
+        "id": 7,
+        "city": "Istanbul",
+        "country": "Turkey",
+        "airport_code": "IST"
+    },
+    {
+        "id": 8,
+        "city": "beirut",
+        "country": "lebanon",
+        "airport_code": "RAF"
+    }
+]
